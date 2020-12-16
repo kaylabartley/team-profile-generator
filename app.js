@@ -1,34 +1,65 @@
-/*GIVEN a command-line application that accepts user input
-WHEN I am prompted for my team members and their information
-THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-WHEN I click on an email address in the HTML
-THEN my default email program opens and populates the TO field of the email with the address
-WHEN I click on the GitHub username
-THEN that GitHub profile opens in a new tab
-WHEN I start the application
-THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-WHEN I enter the team manager’s name, employee ID, email address, and office number
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-WHEN I select the engineer option
-THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-WHEN I select the intern option
-THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-WHEN I decide to finish building my team
-THEN I exit the application, and the HTML is generated
+const inquirer = require('inquirer');
+const generatePage = require('./src/page-template');
+const {writeFile, copyFile} = require('./utils/generate-site.js');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
 
-PROJECT MANAGER : NAME ID EMAIL OFFICE#
-ENGINEER : NAME ID EMAIL GITHUB 
-INTERN : NAME ID EMAIL SCHOOL
-COMMON: NAME ID EMAIL
+const engineer = new Engineer;
+const intern = new Intern;
+const manager = new Manager;
 
-Need
----------
-1) edit stylesheet in src/style.css
-2) make page template in src/page-template.js
-3) make team member class file
-4) make project manager, engineer, and intern class file and have them inherit from team member file
-5) use inquirer to prompt user in Generate class method
-6) create project manager, engineer, and intern properties in a Generate class
-6) destructure inputs and store them to properties of class properties in Generate classs
-7) call Generate in app.js
-*/
+function addEngineerOrIntern(){
+     return inquirer
+        .prompt(
+              {
+                type: 'list',
+                message: 'Would you like to enter an engineer or an intern?',
+                name: 'action',
+                choices: ['Engineer', 'Intern']
+              }
+        )
+        .then(({action}) => {
+            let choice = engineer;
+            if(action==='Intern'){
+                choice = intern;
+            }
+            
+                choice.promptUser()
+                    .then(() => {
+                    addAnotherTeammate();
+                    })
+                    .then(() => {
+                        return generatePage(manager.manager, engineer.engineers, intern.interns);
+                    })
+                    .then(pageHTML => {
+                        return writeFile(pageHTML);
+                        return copyFile();
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });     
+        });
+}
+function addAnotherTeammate(){
+        return inquirer
+            .prompt(
+                {
+                    type: 'confirm',
+                    name: 'confirm',
+                    message: 'Would you like to enter another teammate?',
+                    default: false
+                }
+            )
+            .then(({confirm}) => {
+                if (confirm) {
+                    addEngineerOrIntern();
+                }
+            });
+    
+}
+function initializeApp(){
+    manager.promptUser().then(addAnotherTeammate);
+}
+
+initializeApp();
