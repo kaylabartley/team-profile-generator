@@ -32,8 +32,9 @@ Change your directory to team-profile-generator using cd team-profile-generator 
 The MIT License
 
 ## Testing
-        
-...
+
+I used Jest for testing. To install jest, I used npm install jest --save-dev to add Jest to the devDependencies list. In the __tests__ folder, in team-profile-generator director, there are tests for all the constructor files i.e. Manager.js, Engineer.js, and Intern.js. 
+
 ## Questions
 
 GitHub username: kaylabartley

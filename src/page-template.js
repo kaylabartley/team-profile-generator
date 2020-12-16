@@ -88,7 +88,7 @@ module.exports = (managerArr, engineerArr, internArr) => {
       </div>
     </nav>
     <div class="container">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     ${generateManagerCard(managerArr)}
     ${generateEngineerCards(engineerArr)}
     ${generateInternCards(internArr)}

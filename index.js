@@ -4,10 +4,12 @@ const {writeFile, copyFile, copyManagerImg, copyEngineerImg, copyInternImg } = r
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
+const Employee = require('./lib/Employee');
 
 const engineer = new Engineer;
 const intern = new Intern;
 const manager = new Manager;
+const employee = new Employee;
 
 function addEngineerOrIntern(){
      return inquirer
@@ -26,11 +28,9 @@ function addEngineerOrIntern(){
             }
             
                 choice.promptUser()
+                    .then(addAnotherTeammate)
                     .then(() => {
-                    addAnotherTeammate();
-                    })
-                    .then(() => {
-                        return generatePage(manager.manager, engineer.engineers, intern.interns);
+                        return generatePage(manager.getManagerArray(), engineer.getEngineerArray(), intern.getInternArray());
                     })
                     .then(pageHTML => {
                         copyManagerImg();
