@@ -57,6 +57,13 @@ function addAnotherTeammate(){
                 if (confirm) {
                     addEngineerOrIntern();
                 }
+                else{
+                    writeFile(generatePage(manager.getManagerArray(), [], []));
+                    copyManagerImg();
+                    copyEngineerImg();
+                    copyInternImg();
+                }
+                
             });
     
 }

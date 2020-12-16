@@ -1,4 +1,3 @@
-
 const generateManagerCard = array => {
   return `
     ${array.map(({name, id, email, number}) => {
@@ -11,7 +10,7 @@ const generateManagerCard = array => {
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${id}</li>
-            <li class="list-group-item">Email: ${email}</li>
+            <li class="list-group-item">Email: <a href = "mailto:${email}" target="_blank" rel="noopener noreferrer">${email}</a></li>
             <li class="list-group-item">Office Number: ${number}</li>
           </ul>
         </div>
@@ -34,8 +33,8 @@ const generateEngineerCards = array => {
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${id}</li>
-            <li class="list-group-item">Email: ${email}</li>
-            <li class="list-group-item">GitHub Username: ${username}</li>
+            <li class="list-group-item">Email: <a href = "mailto:${email}" target="_blank" rel="noopener noreferrer">${email}</a></li>
+            <li class="list-group-item">GitHub Username: <a href = "http://github.com/${username}">${username}</a></li>
           </ul>
         </div>
       </div>
@@ -57,7 +56,7 @@ const generateInternCards = array => {
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${id}</li>
-            <li class="list-group-item">Email: ${email}</li>
+            <li class="list-group-item">Email: <a href = "mailto:${email}" target="_blank" rel="noopener noreferrer">${email}</a></li>
             <li class="list-group-item">Office Number: ${school}</li>
           </ul>
         </div>
