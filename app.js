@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
-const {writeFile, copyFile} = require('./utils/generate-site.js');
+const {writeFile, copyFile, copyManagerImg, copyEngineerImg, copyInternImg } = require('./utils/generate-site.js');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
@@ -33,8 +33,10 @@ function addEngineerOrIntern(){
                         return generatePage(manager.manager, engineer.engineers, intern.interns);
                     })
                     .then(pageHTML => {
+                        copyManagerImg();
+                        copyEngineerImg();
+                        copyInternImg();
                         return writeFile(pageHTML);
-                        return copyFile();
                     })
                     .catch(err => {
                       console.log(err);

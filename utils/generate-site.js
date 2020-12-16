@@ -13,12 +13,11 @@ const writeFile = fileContent => {
         });
       });
     });
-  };
+};
 
-// copying file
-const copyFile = () => {
+  const copyManagerImg = () => {
     return new Promise((resolve, reject) => {
-      fs.copyFile('./src/style.css', './dist/style.css', err => {
+      fs.copyFile('./src/Manager.png', './dist/Manager.png', err => {
         if (err) {
           reject(err);
           return;
@@ -26,10 +25,41 @@ const copyFile = () => {
   
         resolve({
           ok: true,
-          message: 'Stylesheet created!'
+          message: 'Manager image created!'
+        });
+      });
+    });
+  };
+  const copyEngineerImg = () => {
+    return new Promise((resolve, reject) => {
+      fs.copyFile('./src/Engineer.png', './dist/Engineer.png', err => {
+        if (err) {
+          reject(err);
+          return;
+        }
+  
+        resolve({
+          ok: true,
+          message: 'Engineer image created!'
         });
       });
     });
   };
 
-  module.exports = { writeFile, copyFile };
+const copyInternImg = () => {
+  return new Promise((resolve, reject) => {
+    fs.copyFile('./src/Intern.png', './dist/Intern.png', err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve({
+        ok: true,
+        message: 'Intern image created!'
+      });
+    });
+  });
+};
+
+  module.exports = { writeFile, copyManagerImg, copyEngineerImg, copyInternImg };
