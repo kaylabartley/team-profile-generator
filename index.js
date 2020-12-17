@@ -112,7 +112,6 @@ function initializeApp(){
 
             }
         );
-        console.log(employee.getEmployeeCards());
     }).then(addAnotherTeammate);
 }
 
