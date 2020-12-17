@@ -28,9 +28,39 @@ function addEngineerOrIntern(){
             }
             
                 choice.promptUser()
+                    .then(function(data) {
+                        choice.setValues(data.name, data.id, data.email);
+                        let roleValue = choice.getRole();
+                        if(choice===intern){
+                            choice.setSchool(data.school);
+                            employee.addEmployeeCard(
+                                {
+                                    role: roleValue,
+                                    name: choice.name,
+                                    id: choice.id,
+                                    email: choice.email,
+                                    school: choice.school
+            
+                                }
+                            );
+                        }else{
+                            choice.setUsername(data.username);
+                            employee.addEmployeeCard(
+                                {
+                                    role: roleValue,
+                                    name: choice.name,
+                                    id: choice.id,
+                                    email: choice.email,
+                                    username: choice.username
+            
+                                }
+                            );
+                        }
+                        
+                    })
                     .then(addAnotherTeammate)
                     .then(() => {
-                        return generatePage(manager.getManagerArray(), engineer.getEngineerArray(), intern.getInternArray());
+                        return generatePage(employee.getEmployeeCards());
                     })
                     .then(pageHTML => {
                         copyManagerImg();
@@ -58,7 +88,7 @@ function addAnotherTeammate(){
                     addEngineerOrIntern();
                 }
                 else{
-                    writeFile(generatePage(manager.getManagerArray(), [], []));
+                    writeFile(generatePage(employee.getEmployeeCards()));
                     copyManagerImg();
                     copyEngineerImg();
                     copyInternImg();
@@ -68,7 +98,22 @@ function addAnotherTeammate(){
     
 }
 function initializeApp(){
-    manager.promptUser().then(addAnotherTeammate);
+    manager.promptUser().then(function(data){
+        manager.setValues(data.name, data.id, data.email);
+        manager.setNumber(data.number);
+        let roleValue = manager.getRole();
+        employee.addEmployeeCard(
+            {
+                role: roleValue,
+                name: manager.name,
+                id: manager.id,
+                email: manager.email,
+                number: manager.number
+
+            }
+        );
+        console.log(employee.getEmployeeCards());
+    }).then(addAnotherTeammate);
 }
 
 initializeApp();

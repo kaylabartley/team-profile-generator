@@ -1,6 +1,9 @@
-const generateManagerCard = array => {
+const generateCards = array => {
+  console.log(array);
   return `
-    ${array.map(({name, id, email, number}) => {
+    ${array
+      .filter(({ role }) => role === 'Manager')
+      .map(({name, id, email, number}) => {
       return`
       <div class="col">
         <div class="card" style="width: 18rem;">
@@ -15,15 +18,12 @@ const generateManagerCard = array => {
           </ul>
         </div>
       </div>
-  `;
-  })
-  .join('')}
-  `;
-};
+      `;
+      }).join('')}
 
-const generateEngineerCards = array => {
-  return `
-    ${array.map(({name, id, email, username}) => {
+    ${array
+      .filter(({role}) => role === 'Engineer')
+      .map(({name, id, email, username}) => {
       return`
       <div class="col">
         <div class="card" style="width: 18rem;">
@@ -38,15 +38,11 @@ const generateEngineerCards = array => {
           </ul>
         </div>
       </div>
-  `;
-  })
-  .join('')}
-  `;
-};
-
-const generateInternCards = array => {
-  return `
-    ${array.map(({name, id, email, school}) => {
+      `;
+      }).join('')}
+    ${array
+      .filter(({role}) => role === 'Intern')
+      .map(({name, id, email, school}) => {
       return`
       <div class="col">
         <div class="card" style="width: 18rem;">
@@ -57,17 +53,19 @@ const generateInternCards = array => {
           <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${id}</li>
             <li class="list-group-item">Email: <a href = "mailto:${email}" target="_blank" rel="noopener noreferrer">${email}</a></li>
-            <li class="list-group-item">Office Number: ${school}</li>
+            <li class="list-group-item">Schol: ${school}</li>
           </ul>
         </div>
       </div>
-  `;
-  })
-  .join('')}
-  `;
+      `;
+      }).join('')}
+    `;
 };
 
-module.exports = (managerArr, engineerArr, internArr) => {
+
+
+module.exports = (employeeArr) => {
+  console.log("in page-template" + employeeArr);
     return `
     <!DOCTYPE html>
   <html lang="en">
@@ -88,9 +86,7 @@ module.exports = (managerArr, engineerArr, internArr) => {
     </nav>
     <div class="container">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-    ${generateManagerCard(managerArr)}
-    ${generateEngineerCards(engineerArr)}
-    ${generateInternCards(internArr)}
+    ${generateCards(employeeArr)}
       </div>
     </div>
 
