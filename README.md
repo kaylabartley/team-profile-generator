@@ -37,7 +37,7 @@ The MIT License
 
 ## Testing
 
-I used Jest for testing. To install jest, I used npm install jest --save-dev to add Jest to the devDependencies list. In the __tests__ folder, in team-profile-generator director, there are tests for all the constructor files i.e. Employee.js, Manager.js, Engineer.js, and Intern.js. 
+I used Jest for testing. To install jest, I used npm install jest --save-dev to add Jest to the devDependencies list. In the __tests__ folder, in team-profile-generator directory, there are tests for all the constructor files i.e. Employee.js, Manager.js, Engineer.js, and Intern.js. 
 
 ## Questions
 
