@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const generatePage = require('./src/page-template');
-const {writeFile, copyFile, copyManagerImg, copyEngineerImg, copyInternImg } = require('./utils/generate-site.js');
+const {writeFile, copyManagerImg, copyEngineerImg, copyInternImg } = require('./utils/generate-site.js');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
