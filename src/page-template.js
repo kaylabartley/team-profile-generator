@@ -1,5 +1,4 @@
 const generateCards = array => {
-  console.log(array);
   return `
     ${array
       .filter(({ role }) => role === 'Manager')
@@ -65,7 +64,6 @@ const generateCards = array => {
 
 
 module.exports = (employeeArr) => {
-  console.log("in page-template" + employeeArr);
     return `
     <!DOCTYPE html>
   <html lang="en">
